@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns="http://main.aytos.es" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:ns1="http://org.apache.axis2/xsd" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" targetNamespace="http://main.aytos.es">
+    <wsdl:types>
+        <xs:schema attributeFormDefault="qualified" elementFormDefault="qualified" targetNamespace="http://main.aytos.es">
+            <xs:element name="recibirMensaje">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="args0" type="xs:int"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="recibirMensajeResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="introducirFichero">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="args0" type="xs:int"/>
+                        <xs:element minOccurs="0" name="args1" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="introducirFicheroResponse">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="recibirMensajeRequest">
+        <wsdl:part name="parameters" element="ns:recibirMensaje"/>
+    </wsdl:message>
+    <wsdl:message name="recibirMensajeResponse">
+        <wsdl:part name="parameters" element="ns:recibirMensajeResponse"/>
+    </wsdl:message>
+    <wsdl:message name="introducirFicheroRequest">
+        <wsdl:part name="parameters" element="ns:introducirFichero"/>
+    </wsdl:message>
+    <wsdl:message name="introducirFicheroResponse">
+        <wsdl:part name="parameters" element="ns:introducirFicheroResponse"/>
+    </wsdl:message>
+    <wsdl:portType name="AnotacionesPortType">
+        <wsdl:operation name="recibirMensaje">
+            <wsdl:input message="ns:recibirMensajeRequest" wsaw:Action="urn:recibirMensaje"/>
+            <wsdl:output message="ns:recibirMensajeResponse" wsaw:Action="urn:recibirMensajeResponse"/>
+        </wsdl:operation>
+        <wsdl:operation name="introducirFichero">
+            <wsdl:input message="ns:introducirFicheroRequest" wsaw:Action="urn:introducirFichero"/>
+            <wsdl:output message="ns:introducirFicheroResponse" wsaw:Action="urn:introducirFicheroResponse"/>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="AnotacionesSoap11Binding" type="ns:AnotacionesPortType">
+        <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="recibirMensaje">
+            <soap:operation soapAction="urn:recibirMensaje" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="introducirFichero">
+            <soap:operation soapAction="urn:introducirFichero" style="document"/>
+            <wsdl:input>
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="AnotacionesSoap12Binding" type="ns:AnotacionesPortType">
+        <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+        <wsdl:operation name="recibirMensaje">
+            <soap12:operation soapAction="urn:recibirMensaje" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="introducirFichero">
+            <soap12:operation soapAction="urn:introducirFichero" style="document"/>
+            <wsdl:input>
+                <soap12:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output>
+                <soap12:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:binding name="AnotacionesHttpBinding" type="ns:AnotacionesPortType">
+        <http:binding verb="POST"/>
+        <wsdl:operation name="recibirMensaje">
+            <http:operation location="Anotaciones/recibirMensaje"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="recibirMensaje"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="recibirMensaje"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="introducirFichero">
+            <http:operation location="Anotaciones/introducirFichero"/>
+            <wsdl:input>
+                <mime:content type="text/xml" part="introducirFichero"/>
+            </wsdl:input>
+            <wsdl:output>
+                <mime:content type="text/xml" part="introducirFichero"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="Anotaciones">
+        <wsdl:port name="AnotacionesHttpSoap11Endpoint" binding="ns:AnotacionesSoap11Binding">
+            <soap:address location="http://localhost:8080/axis2/services/Anotaciones"/>
+        </wsdl:port>
+        <wsdl:port name="AnotacionesHttpSoap12Endpoint" binding="ns:AnotacionesSoap12Binding">
+            <soap12:address location="http://localhost:8080/axis2/services/Anotaciones"/>
+        </wsdl:port>
+        <wsdl:port name="AnotacionesHttpEndpoint" binding="ns:AnotacionesHttpBinding">
+            <http:address location="http://localhost:8080/axis2/services/Anotaciones"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>
